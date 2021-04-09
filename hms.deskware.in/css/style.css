@@ -1,0 +1,12 @@
+﻿body {
+}
+
+
+*{ FONT-SIZE: 8pt; FONT-FAMILY: verdana; }
+ b { FONT-WEIGHT: bold; } 
+ .listtitle { BACKGROUND: #0267B1; COLOR: #EEEEEE; white-space: nowrap; border-radius: 3px; box-shadow: 1px 1px 3px #727272; }
+  td.list { BACKGROUND: #EEEEEE; white-space: nowrap; }
+   input { border-radius: 3px; padding-left: 4px; padding-right: 4px; }
+    .inset { border: 1px inset #DDDDDD; } 
+
+  

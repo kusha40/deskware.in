@@ -1,0 +1,163 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="site.master.cs" Inherits="site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Tile Hub</title>
+    <link href="css/bootstrap.min.css" media="screen" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet" media="screen"/>
+    <link href="fonts/icomoon/icomoon.css" rel="stylesheet"/>
+    <link href="css/c3/c3.css" rel="stylesheet" />
+    <link href="css/circliful/circliful.css" rel="stylesheet"/>
+            <script src="js/jquery.js"></script><script src="js/bootstrap.min.js"></script><script src="js/sparkline/retina.js"></script><script src="js/sparkline/custom-sparkline.js"></script><script src="js/scrollup/jquery.scrollUp.js"></script><script src="js/d3/d3.v3.min.js"></script><script src="js/c3/c3.js"></script><script src="js/c3/c3.custom.js"></script><script src="js/jvectormap/jquery-jvectormap-2.0.3.min.js"></script><script src="js/jvectormap/world-mill-en.js"></script><script src="js/jvectormap/gdp-data.js"></script><script src="js/jvectormap/world-map.js"></script><script src="js/circliful/circliful.min.js"></script><script src="js/circliful/circliful.custom.js"></script><script src="js/peity/peity.min.js"></script><script src="js/peity/custom-peity.js"></script><script src="js/custom.js"></script>
+
+    <script type="text/javascript">
+        function clockon() {
+
+            var currentTime = new Date()
+            var hours = currentTime.getHours()
+            var minutes = currentTime.getMinutes()
+            var seconds = currentTime.getSeconds()
+            if (minutes < 10)
+                minutes = "0" + minutes;
+            var suffix = "AM";
+            if (hours >= 12) {
+                suffix = "PM";
+                hours = hours - 12;
+            }
+            if (hours == 0) {
+                hours = 12;
+            }
+            if (seconds < 10) { seconds = "0" + seconds }
+            var current_time = hours + ":" + minutes + ":" + seconds + " " + suffix;
+            bgclocknoshade.innerHTML = current_time
+            var timer = setTimeout("clockon()", 200)
+        }
+   </script>
+
+
+  <%--  <script  type="text/javascript">
+        window.onbeforeunload = confirmExit;
+        function confirmExit() {
+            return "Are you sure you want to exit this page?";
+        }
+</script>--%>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+  
+</head>
+<body onload="clockon()" >
+   
+
+
+    <form id="form1" runat="server">
+        
+       
+<header><a href="Dashboard.aspx" class="logo"><%--<img src="img/logo.jpg" alt="CRM"/>--%></a><ul id="header-actions" class="clearfix">
+
+  
+
+     
+<li class="list-box user-admin dropdown"><div class="admin-details"><div class="name" id="usrname" runat="server">Srinu</div><div class="designation" id="desig" runat="server">Current User</div><%--<div class="designation">Last Login</div>--%></div><a id="drop4" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-account_circle"></i></a><ul class="dropdown-menu sm">
+    <li class="dropdown-content">
+       <img id="img" runat="server" src="img/thumbs/user7.png" style="padding:5px; margin-left:25px;width:100px;height:100px" alt="User Info"/>
+         <a href="edit_profile.aspx">Edit Profile</a> <a href="change_pwd.aspx">Change Password</a> 
+         <%--<a href="login.aspx">Logout</a>--%>
+        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" CausesValidation="false">Logout</asp:LinkButton>
+    </li></ul></li></ul>
+ 
+
+</header><div class="container-fluid"><nav class="navbar navbar-default"><div class="navbar-header"><span class="navbar-text">Menu</span> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navbar" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button></div><div class="collapse navbar-collapse" id="collapse-navbar">
+    <ul class="nav navbar-nav" id="Li8" runat="server" visible="false">
+     <li   ><a href="checkorder.aspx">Download Order From</a></li>
+        </ul>
+    <ul class="nav navbar-nav" id="nav_menu" runat="server">
+        <li  id="Li5" runat="server" ><a id="A5" runat="server" href="Dashboard.aspx" >Dashboard</a></li>
+        <li  id="Dashboard" runat="server" ><a id="dashboard_link" runat="server" href="daily_reporting.aspx" ><%--<i class="icon-blur_on"></i>--%>Daily Reporting</a></li>
+    <li class="dropdown" id="CreateNewInstitue" runat="server" ><a href="#" id="a1" runat="server"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-business_center"></i>--%> To do<span class="caret"></span></a>
+    <ul class="dropdown-menu"><li ><a href="add_todo.aspx" id="a2" runat="server" >Add New To do</a></li>
+        <li ><a href="future_have_todo.aspx"   >Future Have To do</a></li>
+         <li ><a href="future_may_todo.aspx"   >Future May To do</a></li>
+        <li id="update_sis" runat="server" ><a href="todo_list.aspx" id="a3" runat="server">To do Reminder</a></li>
+        <li id="Li10" runat="server" ><a href="routine_job_task.aspx" id="a6" runat="server">Routine Job</a></li>
+        <li id="Li24" runat="server" ><a href="edit_todo.aspx" id="a7" runat="server" visible="false">Edit To Do</a></li>
+   </ul>
+         </li>
+          <li class="dropdown" id="li19" runat="server"  >
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Dead To Do <span class="caret"></span></a>
+        <ul class="dropdown-menu"> 
+              <li id="Li20" runat="server" ><a href="dead_todo.aspx">Daily To do </a></li>
+             <li id="Li21" runat="server" ><a href="dead_future_have_todo.aspx">Future Have To do </a></li>
+             <li id="Li22" runat="server" ><a href="dead_future_may_todo.aspx">Future May To do </a></li>
+   </ul>
+    
+    </li>
+             <li class="dropdown" id="li13" runat="server"  >
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Approval <span class="caret"></span></a>
+        <ul class="dropdown-menu"> 
+              <li id="Li6" runat="server" ><a href="to_do_approval.aspx">To do Approval</a></li>
+             <li id="Li15" runat="server" ><a href="future_have_todo_approval.aspx">Future Have To do Approval</a></li>
+             <li id="Li16" runat="server" ><a href="future_may_todoapproval.aspx">Future May To do Approval</a></li>
+               <li id="Li23" runat="server" ><a href="Reschedule_todo_approval.aspx">Reschedule To do Approval</a></li>
+                <li id="Li14" runat="server" ><a href="routine_job_approval.aspx">Routine Job Approval</a></li>
+   </ul>
+     </li>
+           <li  id="Li2" runat="server" ><a id="A4" runat="server" href="add_complaint.aspx" ><%--<i class="icon-blur_on"></i>--%>Add Complaint</a></li>
+  
+        <li class="dropdown" id="report_mis" runat="server">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Reports <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+                 <li id="report_mis2" runat="server"><a href="todo_report.aspx">To do Report</a></li>
+                <li id="Li17" runat="server"><a href="future_have_todo_report.aspx">Future Have To do Report</a></li>
+                <li id="Li18" runat="server"><a href="future_may_todo_report.aspx">Future May To do Report</a></li>
+               <li id="Li3" runat="server"><a href="daily_report.aspx">Daily Reporting</a></li>
+              <li id="report_mis3" runat="server" visible="false"><a href="complaint_report.aspx">Complaint Reporting</a></li>
+         
+              <li id="Li4" runat="server"><a href="my_team.aspx">My Team</a></li>
+             <li id="Li11" runat="server"><a href="varification_report.aspx">Verification Daily Report</a></li>
+             <li id="Li12" runat="server"><a href="routine_job_report.aspx">Routine Job Report</a></li>
+   </ul>
+     </li>
+      
+           <li class="dropdown" id="li1" runat="server" visible="false" >
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Masters <span class="caret"></span></a>
+        <ul class="dropdown-menu"><li><a href="create_account.aspx">Create User Account</a></li>
+                       <li  id="Li7"  runat="server" ><a href="create_team.aspx" >Create Team</a></li>
+             <li  id="Li9"  runat="server" ><a href="job_task.aspx" >Create Routine Job Task</a></li>
+           
+   </ul>
+     </li>
+       
+
+</ul></div></nav><div class="dashboard-wrapper"><div class="top-bar clearfix"><div class="row gutter"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><div class="page-title"><h4>Welcome To Tilehub</h4></div></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        
+        
+        <ul class="right-stats" id="mini-nav-right"><li> 
+             
+            <i class="icon-clock3"></i>  <%--<a href="javascript:void(0)" class="btn btn-danger"><span id="bgclocknoshade1" runat="server"></span></a></li>--%><li><a href="javascript:void(0)" class="btn btn-success"><span id="bgclocknoshade" runat="server"></span></a></li></ul></div>
+                                                                                  </div></div>
+    <div class="main-container" >
+            <div>
+               
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+       
+        </asp:ContentPlaceHolder>
+    </div>
+</div>
+                                                                                                                                                                                             </div>
+
+         </div>
+        <%--<a href="http://www.genuinecrm.com" target="_blank" >Genuine CRM</a> 2016-2017 <span> for support call at :+91-8527394300</span>--%>
+        <footer>Designed By © </footer>
+
+    </form>
+            
+     
+</body>
+</html>

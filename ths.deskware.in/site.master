@@ -1,0 +1,173 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="site.master.cs" Inherits="site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <%-- <link rel="shortcut icon" href="img/favicon.png"/>--%>
+    <title> Arkaya CRM</title>
+    <link href="css/bootstrap.min.css" media="screen" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet" media="screen"/>
+    <link href="fonts/icomoon/icomoon.css" rel="stylesheet"/>
+    <link href="css/c3/c3.css" rel="stylesheet" />
+    <link href="css/circliful/circliful.css" rel="stylesheet"/>
+            <script src="js/jquery.js"></script><script src="js/bootstrap.min.js"></script><script src="js/sparkline/retina.js"></script><script src="js/sparkline/custom-sparkline.js"></script><script src="js/scrollup/jquery.scrollUp.js"></script><script src="js/d3/d3.v3.min.js"></script><script src="js/c3/c3.js"></script><script src="js/c3/c3.custom.js"></script><script src="js/jvectormap/jquery-jvectormap-2.0.3.min.js"></script><script src="js/jvectormap/world-mill-en.js"></script><script src="js/jvectormap/gdp-data.js"></script><script src="js/jvectormap/world-map.js"></script><script src="js/circliful/circliful.min.js"></script><script src="js/circliful/circliful.custom.js"></script><script src="js/peity/peity.min.js"></script><script src="js/peity/custom-peity.js"></script><script src="js/custom.js"></script>
+
+    <script type="text/javascript">
+        function clockon() {
+
+            var currentTime = new Date()
+            var hours = currentTime.getHours()
+            var minutes = currentTime.getMinutes()
+            var seconds = currentTime.getSeconds()
+            if (minutes < 10)
+                minutes = "0" + minutes;
+            var suffix = "AM";
+            if (hours >= 12) {
+                suffix = "PM";
+                hours = hours - 12;
+            }
+            if (hours == 0) {
+                hours = 12;
+            }
+            if (seconds < 10) { seconds = "0" + seconds }
+            var current_time = hours + ":" + minutes + ":" + seconds + " " + suffix;
+            bgclocknoshade.innerHTML = current_time
+            var timer = setTimeout("clockon()", 200)
+        }
+   </script>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body onload="clockon()" >
+    <form id="form1" runat="server">.
+<header><a href="index-2.html" class="logo"><img src="img/logo1.png" alt="CRM"/></a><ul id="header-actions" class="clearfix">
+    
+<li class="list-box user-admin dropdown"><div class="admin-details"><div class="name" id="usrname" runat="server">Srinu</div><div class="designation" id="desig" runat="server">Current User</div></div><a id="drop4" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-account_circle"></i></a><ul class="dropdown-menu sm">
+    <li class="dropdown-content">
+       <img id="img" runat="server" src="img/thumbs/user7.png" style="padding:5px; margin-left:25px" width="100" height="100" alt="User Info"/>
+         <a href="edit_profile.aspx">Edit Profile</a> <a href="change_pwd.aspx">Change Password</a> 
+         <%--<a href="login.aspx">Logout</a>--%>
+        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" CausesValidation="false">Logout</asp:LinkButton>
+    </li></ul></li></ul>
+ 
+
+</header><div class="container-fluid"><nav class="navbar navbar-default"><div class="navbar-header"><span class="navbar-text">Menu</span> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navbar" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button></div><div class="collapse navbar-collapse" id="collapse-navbar">
+    <ul class="nav navbar-nav">
+        <li  id="lblm1" runat="server" visible="false" ><a href="Dashboard.aspx"  ><%--<i class="icon-blur_on"></i>--%>Dashboard</a></li>
+         <li class="dropdown" id="lblm2" runat="server" visible="false" ><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-business_center"></i>--%>Leads <span class="caret"></span></a>
+    <ul class="dropdown-menu"><li id="lblm3" runat="server" visible="false"><a href="add_lead.aspx">Create New Lead</a></li>
+        <li id="lblm4" runat="server" visible="false"><a href="total_lead.aspx">Total Lead</a></li>
+        <li id="lblm5" runat="server" visible="false"><a href="today.aspx">Today Followup</a></li>
+        <li id="lblm6" runat="server" visible="false"><a href="pending.aspx">Pending Followup</a></li>
+             <li id="lblm7" runat="server" visible="false"><a href="future.aspx">Future Followup</a></li>
+        <li id="lblm36" runat="server" visible="false"><a href="assign_lead.aspx">Assign Leads</a></li>
+   <%--     <li id="update_sis" runat="server" ><a href="update_sale.aspx">Update Sale</a></li>--%>
+   </ul>
+    </li>
+          <li class="dropdown" id="lblm8" runat="server" visible="false"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-business_center"></i>--%>Meetings <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li id="lblm9" runat="server" visible="false"><a href="total_meetings.aspx">Total Meetings</a></li>
+        <li id="lblm10" runat="server" visible="false"><a href="today_meeting.aspx">Today Meetings</a></li>
+        <li id="lblm11" runat="server" visible="false"><a href="pending_meeting.aspx">Pending Meetings</a></li>
+             <li id="lblm12" runat="server" visible="false"><a href="future_meeting.aspx">Future Meetings</a></li>
+   <%--     <li id="update_sis" runat="server" ><a href="update_sale.aspx">Update Sale</a></li>--%>
+   </ul>
+    </li>
+
+         <li class="dropdown" id="Li8" runat="server" >
+        <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Survey &amp; Installation<span class="caret"></span></a>
+        <ul class="dropdown-menu"><li id="Li9" runat="server" ><a href="survey_request.aspx">Survey Request</a></li>
+            <li id="Li10" runat="server" ><a href="#">Survey Report</a></li>
+                <li id="Li11" runat="server" ><a href="#">Installation Report</a></li>
+   </ul>
+     </li>
+        <li class="dropdown" id="Li12" runat="server" >
+        <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Quotation<span class="caret"></span></a>
+        <ul class="dropdown-menu"><li id="Li13" runat="server" ><a href="#">Saving Sheet</a></li>
+              <li id="Li14" runat="server" ><a href="#">Generate quote</a></li>
+            <li id="Li15" runat="server" ><a href="#">Generate quote</a></li>
+            <li id="Li16" runat="server" ><a href="#">Existing Quote</a></li>
+            <li id="Li17" runat="server" ><a href="#">Existing Saving Sheet</a></li>
+   </ul>
+     </li>
+
+          <li class="dropdown" id="lblm27" runat="server" visible="false">
+        <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Order<span class="caret"></span></a>
+        <ul class="dropdown-menu"><li id="lblm28" runat="server" visible="false"><a href="converted.aspx">Generate Order</a></li>
+            <li id="lblm29" runat="server" visible="false"><a href="view_all_order.aspx">View All Order</a></li>
+   </ul>
+     </li>
+        <li class="dropdown" id="lblm30" runat="server" visible="false">
+        <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Quotation<span class="caret"></span></a>
+        <ul class="dropdown-menu"><li id="lblm31" runat="server" visible="false"><a href="total_customer_quotation.aspx">Generate Quotation</a></li>
+              <li id="lblm32" runat="server" visible="false"><a href="view_all_quotation.aspx">View All Quotation</a></li>
+   </ul>
+     </li>
+     <%--<li><a href="#"><%--<i class="icon-widgets"></i>Create Action Plan</a></li>--%>
+  <li class="dropdown" id="lblm13" runat="server" visible="false">
+        <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Knowldge Base <span class="caret"></span></a>
+        <ul class="dropdown-menu"><li id="lblm14" runat="server" visible="false"><a href="knowledge_base.aspx">Download</a></li>
+   </ul>
+     </li>
+            <li class="dropdown" id="Li1" runat="server" visible="false">
+        <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Accounts <span class="caret"></span></a>
+        <ul class="dropdown-menu"><li id="Li2" runat="server" ><a href="engineer_challan.aspx">Employee Challan Issue</a></li>
+            <li id="Li3" runat="server" ><a href="engineer_ledger.aspx">Employee Ledger</a></li>
+             <li id="Li4" runat="server"><a href="paid_toengineer.aspx" id="A2" runat="server">Employee Expense Approval</a></li>
+            <li id="Li6" runat="server" ><a href="customer_challan.aspx">Customer Challan Issue</a></li>
+             <li id="Li5" runat="server" ><a href="customer_ledger.aspx">Customer Ledger</a></li>
+   </ul>
+     </li>
+        <li class="dropdown" id="lblm33" runat="server" visible="false">
+        <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Reports <span class="caret"></span></a>
+        <ul class="dropdown-menu"><li id="lblm34" runat="server" visible="false"><a href="lead_work_report.aspx">Lead Work Report</a></li>
+            <li id="lblm35" runat="server" visible="false"><a href="meeting_work_report.aspx">Meeting Work Report</a></li>
+            <li id="Li7" runat="server"><a href="employee_expense_report.aspx">Employee Expense Report</a></li>
+   </ul>
+     </li>
+        <li class="dropdown" id="lblm37" runat="server" visible="false">
+        <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Feedback <span class="caret"></span></a>
+        <ul class="dropdown-menu"><li id="lblm38" runat="server" visible="false"><a href="feedback.aspx">Add Feedback</a></li>
+            <li id="lblm39" runat="server" visible="false"><a href="feedback_report.aspx">Feedback Report</a></li>
+   </ul>
+     </li>
+       
+           <li class="dropdown" id="lblm15" runat="server" visible="false">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%--<i class="icon-terrain"></i>--%>Masters <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li id="lblm16" runat="server" visible="false"><a href="create_account.aspx">Create User Account</a></li>
+             <li id="lblm17" runat="server" visible="false"><a href="create_lead_type.aspx">Create Lead Type</a></li>
+             <li id="lblm18" runat="server" visible="false"><a href="create_lead_source.aspx">Create Lead Source</a></li>
+            <li id="lblm19" runat="server" visible="false"><a href="create_product.aspx">Create Product</a></li>
+              <li id="lblm20" runat="server" visible="false"><a href="upload_document.aspx">Upload Document</a></li>
+            <li id="lblm21" runat="server" visible="false"><a href="terms_condition.aspx">Product Terms and Condition</a></li>
+                <li id="lblm22" runat="server" visible="false"><a href="create_team.aspx">Create Team</a></li>
+            <li id="lblm23" runat="server" visible="false"><a href="my_team.aspx">My Team</a></li>
+                 <li id="lblm24" runat="server" visible="false"><a href="smtp.aspx">Email SMTP</a></li>
+            <li id="lblm25" runat="server" visible="false"><a href="payment_terms.aspx">Product Payment Terms</a></li>
+            <li id="lblm26" runat="server" visible="false"><a href="user_role.aspx">Create User Role</a></li>
+
+           
+   </ul>
+     </li>
+        
+</ul></div></nav><div class="dashboard-wrapper"><div class="top-bar clearfix"><div class="row gutter"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><div class="page-title"><h4>Welcome to Arkaya Sales Management System</h4></div></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><ul class="right-stats" id="mini-nav-right"><li><i class="icon-clock3"></i>  <%--<a href="javascript:void(0)" class="btn btn-danger"><span id="bgclocknoshade1" runat="server"></span></a></li>--%><li><a href="javascript:void(0)" class="btn btn-success"><span id="bgclocknoshade" runat="server"></span></a></li></ul></div>
+                                                                                  </div></div>
+    <div class="main-container">
+            <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+</div>
+                                                                                                                                                                                             </div>
+
+         </div>
+        <footer>Design & Develop by Arkaya !!! Switch the Sun On © 2017-2018 </footer>
+    </form>
+</body>
+</html>

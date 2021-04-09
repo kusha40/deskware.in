@@ -1,0 +1,120 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="site.master.cs" Inherits="site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <%--<link rel="shortcut icon" href="img/favicon.png"/>--%>
+    <title>Admin Profile</title>
+    <link href="css/bootstrap.min.css" media="screen" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet" media="screen"/>
+    <link href="fonts/icomoon/icomoon.css" rel="stylesheet"/>
+    <link href="css/c3/c3.css" rel="stylesheet" />
+    <link href="css/circliful/circliful.css" rel="stylesheet"/>
+            <script src="js/jquery.js"></script><script src="js/bootstrap.min.js"></script><script src="js/sparkline/retina.js"></script><script src="js/sparkline/custom-sparkline.js"></script><script src="js/scrollup/jquery.scrollUp.js"></script><script src="js/d3/d3.v3.min.js"></script><script src="js/c3/c3.js"></script><script src="js/c3/c3.custom.js"></script><script src="js/jvectormap/jquery-jvectormap-2.0.3.min.js"></script><script src="js/jvectormap/world-mill-en.js"></script><script src="js/jvectormap/gdp-data.js"></script><script src="js/jvectormap/world-map.js"></script><script src="js/circliful/circliful.min.js"></script><script src="js/circliful/circliful.custom.js"></script><script src="js/peity/peity.min.js"></script><script src="js/peity/custom-peity.js"></script><script src="js/custom.js"></script>
+
+    <script type="text/javascript">
+        function clockon() {
+
+            var currentTime = new Date()
+            var hours = currentTime.getHours()
+            var minutes = currentTime.getMinutes()
+            var seconds = currentTime.getSeconds()
+            if (minutes < 10)
+                minutes = "0" + minutes;
+            var suffix = "AM";
+            if (hours >= 12) {
+                suffix = "PM";
+                hours = hours - 12;
+            }
+            if (hours == 0) {
+                hours = 12;
+            }
+            if (seconds < 10) { seconds = "0" + seconds }
+            var current_time = hours + ":" + minutes + ":" + seconds + " " + suffix;
+            bgclocknoshade.innerHTML = current_time
+            var timer = setTimeout("clockon()", 200)
+        }
+   </script>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+  
+</head>
+<body onload="clockon()" >
+   
+
+
+    <form id="form1" runat="server">
+        
+       
+<header><a href="Dashboard.aspx" class="logo" style="background-color:white"><%--<img src="img/logo.png" alt="CRM"/>--%></a><ul id="header-actions" class="clearfix">
+
+</ul>
+ 
+
+</header><div class="container-fluid"><nav class="navbar navbar-default"><div class="navbar-header"><span class="navbar-text">Menu</span> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navbar" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button></div><div class="collapse navbar-collapse" id="collapse-navbar">
+    <ul class="nav navbar-nav">
+        <li  id="Dashboard" runat="server" ><a href="../Dashboard.aspx" >Home</a></li>
+    <li class="dropdown" id="CreateNewInstitue" runat="server" ><a href="#" id="a1" runat="server"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Accounts<span class="caret"></span></a>
+    <ul class="dropdown-menu"><li ><a href="cash_in.aspx" runat="server" >Cash IN</a></li>
+        <li id="update_sis" runat="server" ><a href="cash_out.aspx" id="a3" runat="server">Cash Out</a></li>
+         <li id="Li5" runat="server" ><a href="cheque_out.aspx" id="a4" runat="server">Cheque Out</a></li>
+           <li id="Li11" runat="server" ><a href="avg_stock_pricing.aspx" id="a11" runat="server">Average Stock Pricing</a></li>
+           <li id="Li13" runat="server" ><a href="assests.aspx" id="a13" runat="server">Assets</a></li>
+         <li id="Li18" runat="server" ><a href="issue_salesman_challan.aspx" id="a18" runat="server">Issue Salesman Challan</a></li>
+          <li id="Li22" runat="server" ><a href="issue_emp_challan.aspx" id="a22" runat="server">Issue Employee Challan</a></li>
+   </ul>
+    </li>
+ <li class="dropdown" id="Li6" runat="server" ><a href="#" id="a5" runat="server"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Ledger<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li id="Li7" runat="server" ><a href="current_ledger.aspx" id="a7" runat="server">Current Ledger</a></li>
+         <li id="Li8" runat="server" ><a href="obc_ledger.aspx" runat="server">OBC Ledger</a></li>
+                 <li id="Li9" runat="server" ><a href="hdfc_ledger.aspx" id="a9" runat="server">HDFC Ledger</a></li>
+         <li id="Li10" runat="server" ><a href="cash_ledger.aspx" id="a10" runat="server">Cash Ledger</a></li>
+          <li id="Li4" runat="server" ><a href="employee_ledger.aspx" id="a8" runat="server">Employee Ledger</a></li>
+        <li id="Li12" runat="server" ><a href="companyledger.aspx" id="a12" runat="server">All Company Ledger</a></li>
+         <li id="Li23" runat="server" ><a href="all_emp_bal.aspx" id="a23" runat="server">All Employee Balance</a></li>
+         <li id="Li14" runat="server" ><a href="assetsledger.aspx" id="a14" runat="server">Assets Ledger</a></li>
+         <li id="Li17" runat="server" ><a href="capitel_ledger.aspx" id="a17" runat="server">Capital Ledger</a></li>
+
+            <li id="Li19" runat="server" ><a href="dealer_report.aspx" id="a19" runat="server">Dealer Pricelist</a></li>
+         <li id="Li20" runat="server" ><a href="salesman_report.aspx" id="a20" runat="server">Salesmen Pricelist</a></li>
+        <li id="Li21" runat="server" ><a href="volume_report.aspx" id="a21" runat="server">Dealer Volume list</a></li>
+   </ul>
+    </li>
+         <li class="dropdown" id="Li1" runat="server" ><a href="#" id="a2" runat="server"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Employee Section<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li id="Li2" runat="server" ><a href="create_employee.aspx" id="a6" runat="server">Create Employee</a></li>
+         <li id="Li3" runat="server" ><a  href="emp_atteandance.aspx" runat="server">Employee Attendance</a></li>
+       
+   </ul>
+    </li>
+        <li class="dropdown" id="Li15" runat="server" ><a href="#" id="a15" runat="server"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Capital Master<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li id="Li16" runat="server" ><a href="capital_entry.aspx" id="a16" runat="server">Capital Entry</a></li>
+   </ul>
+    </li>
+</ul></div></nav><div class="dashboard-wrapper"><div class="top-bar clearfix"><div class="row gutter"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><div class="page-title"><h4>Welcome To Admin</h4></div></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><ul class="right-stats" id="mini-nav-right"><li><i class="icon-clock3"></i>  <%--<a href="javascript:void(0)" class="btn btn-danger"><span id="bgclocknoshade1" runat="server"></span></a></li>--%><li><a href="javascript:void(0)" class="btn btn-success"><span id="bgclocknoshade" runat="server"></span></a></li></ul></div>
+                                                                                  </div></div>
+    <div class="main-container" >
+            <div>
+               
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+       
+        </asp:ContentPlaceHolder>
+    </div>
+</div>
+                                                                                                                                                                                             </div>
+
+         </div>
+        <footer>Designed By © <a href="http://www.genuinecrm.com" target="_blank" >Genuine CRM</a> 2016-2017 <span> </span></footer>
+
+    </form>
+            
+     
+</body>
+</html>

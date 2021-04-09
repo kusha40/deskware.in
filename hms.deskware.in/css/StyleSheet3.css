@@ -1,0 +1,259 @@
+﻿.MenuBar { font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; }
+
+.StaticMenuItem 
+{
+    background-color: #1999cf;   -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;   font: 14pt calibri;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin: auto; vertical-align: middle; background-repeat: repeat-x;
+    height: 70px; text-align: center; color: white; padding: 5px;
+}
+
+.StaticMenuItemStyle { color: #ffffff; padding: 20px; }
+
+ 
+.StaticHoverStyle { background-color: #b6e390; color: #5f5f5f; }
+
+.StaticSelectedStyle { background-color: #ffe99f; color: #5f5f5f; }
+
+.DynamicMenuItemStyle 
+{ 
+    background-color: #bdeafe; border-width: 1px; border-style: solid;
+    border-color: #000000; -moz-border-radius: 1px; -webkit-border-radius: 1px;
+    font: 13pt calibri; margin: auto;border-left: 0px solid #c1c1c1; 
+    border-right: 0px solid #c1c1c1; border-top: 0px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1; border-spacing: 0px; 
+    vertical-align: middle; background-repeat: repeat-x;
+    height: 50px; text-align: left; color: #5f5f5f; padding: 5px;
+}
+
+.DynamicHoverStyle { background-color: #eca74c; color: #ffffff; }
+
+
+#menu3
+{
+	height:40px;
+	width:900px;
+	background-color:#5BB531;
+	padding-bottom:20px;
+}
+.menu_text
+{
+	float: left;
+	font-size: 18px;
+	font-weight: bold;
+	margin-left:10px;
+	margin-top: 6px;	
+}
+/*ADMIN*/
+.nav
+{
+	margin: 0;
+	padding: 0px 0px 0;
+	line-height: 100%;
+	font-size: 12px;
+	height:35px;
+	width:950px;
+	/*background:purple;#5AB631;#1879BD #007BC1*/
+	color:#fff;	
+}
+.nav li
+{
+	margin: 0 0px;
+	padding: 0 0 0px;
+	float: left;
+	position: relative;
+	list-style: none;
+	/*width: 150px;*/
+	height: 12px;
+	left: 1px;
+}
+
+/* main level link */
+.nav a
+{
+	color: #fff;
+	z-index: 1000;
+	text-decoration: none;
+	display: block;
+	padding: 0px 0px;
+	margin: 0px;
+	font: normal 14px arial;
+	margin-top: 0px;
+	height:26px;
+	padding:10px 45px 8px 36px;
+   
+    /*padding:top right bootom left inhert*/
+    
+	
+}
+.nav a:hover
+{
+	color: #ED3237;
+	
+}
+/* main level link hover */
+.nav .current a, .nav li:hover > a
+{
+	color:#B0E5B0;/*#007BC1;*/
+	
+	
+}
+
+/* sub levels link hover */
+.nav ul li:hover a, .nav li:hover li a
+{	
+	/* border-color :purple;*/
+	color: #000;
+	padding:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+	
+	
+}
+
+
+.nav ul a:hover
+{
+	color: #fff !important;
+	background-color:#F5BD20 !important;	/*#D7D7D7   background-color: #F5BD20; */
+}
+
+/* dropdown */
+.nav li:hover > ul
+{
+	display: block;
+	/*background-color:#3A4F63;*/
+	margin-top:-8px;
+}
+
+/* level 2 list */
+.nav ul
+{
+	display: none;
+	margin-left: 0px;
+	margin-top: 0px;
+	padding: 0;
+	width: 150px;
+	height: auto;
+	position: absolute;
+	top: 44px;
+	left: 0px;
+	/*background-color: #1879BD;/*#eee*/
+	z-index:10;
+	left:33px;
+	
+}
+.nav ul li
+{
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 90px;
+	height: 38px;
+	left: -32px;
+	text-align: left;
+	border-bottom:1px solid #fff;
+	
+}
+
+.nav ul a
+{
+	font-weight: normal;
+	padding-right: 0px;
+	margin-top: 0px;
+}
+
+/* level 3+ list */
+.nav ul ul
+{
+	left: 152px;
+	top: 5px;
+	width:150px;
+}
+.nav ul li > a
+{
+	
+	/*border-bottom:1px solid #fff; */
+}
+/* rounded corners of first and last link */
+.nav ul li:first-child > a
+{
+	
+}
+.nav ul li:last-child > a
+{
+	
+}
+
+/* clearfix */
+.nav:after
+{
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+.nav
+{
+	display: inline-block;
+}
+html[xmlns] .nav
+{
+	display: block;
+}
+
+* html .nav
+{
+	height: 1%;
+}
+div.menu_bar
+{
+    padding: 1px 1px 1px 0px;
+}
+
+div.menu_bar ul
+{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+}
+
+
+div.menu_bar ul li a, div.menu_bar ul li a:visited
+{
+    background-color: #FDEFC8;
+    border: 1px #FDEFC8 solid;
+    color: black;
+    display: block;
+    line-height: 1.35em;
+    padding: 4px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+div.menu_bar ul li a:hover
+{
+   background-color: #F5BD20;
+    color: #000;
+    text-decoration: none;
+}
+
+div.menu_bar ul li a:active
+{
+    background-color: #465c71;
+    color: #cfdbe6;
+    text-decoration: none;
+}
+
+.new_menu_bar
+{
+	visibility:hidden;
+}
+.new_menu_bar:hover
+{
+	visibility:visible;
+}

@@ -1,0 +1,598 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="Site" %>
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VGC CRM</title>
+   <!-- BOOTSTRAP STYLES-->
+    <link href="Content/bootstrap.simplex.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="Content/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="Content/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+  
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="js/jquery-1.10.2.js"></script>
+   
+    <!-- BOOTSTRAP SCRIPTS -->
+   <script src="js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+  <script src="js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+<script src="js/custom.js"></script>
+      <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        function clockon() {
+
+            var currentTime = new Date()
+            var hours = currentTime.getHours()
+            var minutes = currentTime.getMinutes()
+            var seconds = currentTime.getSeconds()
+            if (minutes < 10)
+                minutes = "0" + minutes;
+            var suffix = "AM";
+            if (hours >= 12) {
+                suffix = "PM";
+                hours = hours - 12;
+            }
+            if (hours == 0) {
+                hours = 12;
+            }
+            if (seconds < 10) { seconds = "0" + seconds }
+            var current_time = hours + ":" + minutes +":" + seconds+" " + suffix;
+            bgclocknoshade.innerHTML = current_time
+            var timer = setTimeout("clockon()", 200)
+        }
+   </script>
+    <style type="text/css">
+       .lbl {
+            FONT-SIZE: 8pt;
+            FONT-FAMILY: verdana;
+        }
+    </style>
+    <script type="text/javascript">
+        function disableCtrlKeyCombination(e) {
+            //list all CTRL + key combinations you want to disable
+            var forbiddenKeys = new Array("a", "s", "c");
+            var key;
+            var isCtrl;
+
+            if (window.event) {
+                key = window.event.keyCode;     //IE
+                if (window.event.ctrlKey)
+                    isCtrl = true;
+                else
+                    isCtrl = false;
+            }
+            else {
+                key = e.which;     //firefox
+                if (e.ctrlKey)
+                    isCtrl = true;
+                else
+                    isCtrl = false;
+            }
+
+            //if ctrl is pressed check if other key is in forbidenKeys array
+            if (isCtrl) {
+                for (i = 0; i < forbiddenKeys.length; i++) {
+                    //case-insensitive comparation
+                    if (forbiddenKeys[i].toLowerCase() == String.fromCharCode(key).toLowerCase()) {
+                        //                                    alert("Key combination CTRL + "
+                        //                                                + String.fromCharCode(key)
+                        //                                                + " has been disabled.");                                   
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    </script>
+
+    <%--<script type="text/javascript">
+        setInterval("AccessClipboardData()", 300);
+        var ClipBoardText = "";
+        if (window.clipboardData) {
+            ClipBoardText = window.clipboardData.getData('text');
+            if (ClipBoardText != "No print data") {
+                alert('Sorry you have to allow the page to access clipboard');
+                // hide the div which contains your data
+                document.all("divmaster").style.display = "none"
+            } 
+    </script>
+    <style type="text/css" media="print">
+.noprint {
+display: none;
+}
+</style>--%>
+
+
+      <style type="text/css">
+         .notification
+{
+    /*background-color:#fcefb7;
+    min-height:40px;
+    /*width:50%;*/
+    margin:0 auto;
+
+   /*border:3px solid #e3873b;*/
+    color:#000;
+    font-size:12px;
+    /*box-shadow: 10px 10px 5px #888888;*/
+    font-family:Calibri;
+    
+    /*border-radius:10px;*/
+}
+.chkbox label
+    {
+    margin-right: 5px;
+    background-color: #4CBA5B;
+    color: white;
+    padding: 5px;
+    width: 90px;
+    border-radius: 3px;
+    border:1px solid #929292;
+   }
+         
+        </style>
+   <%--  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $('#<%=dvMsg.ClientID%>').fadeOut(70000, function () {
+                $(this).html(""); //reset label after fadeout
+            });
+        });
+    </script>--%>
+    <link rel="stylesheet" href="js/ezmodal.css">
+    <%--<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>--%>
+<script src="js/ezmodal.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#demo').ezmodal({
+                'autoOpen': true
+            });
+        });
+
+    </script>
+    <style type="text/css">
+         .notification
+{
+  
+    min-height:40px;
+    width:40%;
+    margin:0 auto;
+    text-align:center;
+   
+    color:#000;
+    font-size:12px;
+ 
+    font-family:Calibri;
+}
+        </style>
+</head>
+<body onload="clockon()" >
+    <form id="form1" runat="server">
+        <div id="wrapper">
+       
+            <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+                     <%--<img src="img/logo.jpg"  />--%>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                      <%-- <img src="img/ecoste-logo.png" />
+                 <a class="navbar-brand" href="index.html">VGC CRM</a>--%>
+                </div>
+                <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
+                    <asp:Label ID="bgclocknoshade" runat="server" CssClass="lbl" ></asp:Label> 
+                    <img src="img/administrator-icon.png"  />
+
+                    <asp:Label ID="Label1" runat="server" CssClass="lbl"></asp:Label> 
+                    <asp:Label ID="Label2" runat="server" CssClass="lbl"></asp:Label>&nbsp; &nbsp;
+                     <asp:Label ID="Label5" runat="server" CssClass="lbl"></asp:Label>&nbsp; &nbsp;
+                    <asp:LinkButton ID="changepassword" runat="server" class="btn btn-danger square-btn-adjust" OnClick="changepassword_Click" CausesValidation="False">Change Password</asp:LinkButton>
+                    &nbsp;
+                    <asp:LinkButton ID="lbkLogout" runat="server" class="btn btn-danger square-btn-adjust" OnClick="lbkLogout_Click" CausesValidation="False">Logout</asp:LinkButton>
+                </div>
+            </nav>
+            <!-- /. NAV TOP  -->
+           <nav class="navbar-default navbar-side" role="navigation">
+                <div class="sidebar-collapse" id="div_menu" runat="server">
+                    <ul class="nav" id="main-menu">
+                      
+                        <li>
+                            <a id="lblDashboard" href="~/Dashboard.aspx" runat="server"  ><i class="fa fa-dashboard fa-3x"></i>Dashboard</a>
+                        </li>
+                         <li id="stock" runat="server">
+                            <a id="a101" href="#" runat="server"><i class="fa fa-sitemap fa-3x"></i>Stock Module<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                   <a id="A36" href="online_stock_show.aspx" runat="server"  >Stock Show</a>
+                                </li>
+                                   <li>
+                                   <a id="A38" href="stock_keeper.aspx" runat="server" >Stock Keeper</a>
+                                </li>
+                                  <li>
+                                   <a id="A52" href="movement_of_stock.aspx" runat="server" >Movement of Stock</a>
+                                </li>
+                           
+                                </ul>
+                        </li>
+                         <li>
+                            <a id="a1" href="#" runat="server"><i class="fa fa-sitemap fa-3x"></i>Generate Challan<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a2" href="issue_challan.aspx" runat="server" >Issue Challan (WM)  </a>
+                                </li>
+                                  <li>
+                                    <a id="a3" href="challan_issue_without_material.aspx" runat="server"  visible="false">Issue Challan (WOM)  </a>
+                                </li>
+                                 <li>
+                                    <a id="a4" href="issue_return_challan.aspx" runat="server" >Issue Return Challan </a>
+                                </li>
+                                 <li>
+                                    <a id="a5" href="challan_view.aspx" runat="server" visible="false" >Issue Show  </a>
+                                </li>
+                                 <li>
+                                    <a id="a59" href="print_all_challan.aspx" runat="server"  >Print All Challan  </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                         <li>
+                            <a id="a46" href="#" runat="server"><i class="fa fa-sitemap fa-3x"></i>Sample Challan<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a47" href="issue_sample_challan.aspx" runat="server" >Issue Sample Challan</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                            <li>
+                            <a id="a39" href="#" runat="server"><i class="fa fa-sitemap fa-3x"></i>Cash Challan<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a40" href="cash1.aspx" runat="server" >Issue Cash Challan (WM)  </a>
+                                </li>
+                                  <li>
+                                    <a id="a41" href="issue_cash_Challan_without_material.aspx" runat="server">Issue Cash Challan (WOM)  </a>
+                                </li>
+                                 <li>
+                                    <a id="a42" href="cash2.aspx" runat="server" >Issue Cash  Return Challan </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="a102" runat="server">
+                            <a id="a6" href="#" runat="server" visible="false"><i class="fa fa-sitemap fa-3x"></i>Stock Master<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a7" href="stock_entry.aspx" runat="server" >Stock Entry (WP)</a>
+                                </li>
+                                 <li>
+                                    <a id="a8" href="stock_entry_without_purchase.aspx" runat="server" >Stock Entry (WOP)</a>
+                                </li>
+                                  <li>
+                                    <a id="a9" href="stock_show.aspx" runat="server" >Stock Show </a>
+                                </li>
+                                 <li>
+                                    <a id="a10" href="edit_min_stock_level.aspx" runat="server" >Edit Product Minimum Stock </a>
+                                </li>
+                                    <li>
+                                    <a id="a54" href="order_generation.aspx" runat="server" >Order Generation </a>
+                                </li>
+                                <li>
+                                    <a id="a66" href="fresh_order_generation.aspx" runat="server" >Fresh Order Generation </a>
+                                </li>
+                                <li>
+                                    <a id="a69" href="sample_new.aspx" runat="server" >Sample Entry</a>
+                                </li>
+                                <li>
+                                    <a id="a72" href="update_sample_qty.aspx" runat="server" >Update Sample Qty.</a>
+                                </li>
+                            </ul>
+                        </li>
+                                                    <li>
+                            <a id="a11" href="#" runat="server" visible="false"><i class="fa fa-sitemap fa-3x"></i>Accounts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a12" href="cash_entry.aspx" runat="server" >Cash IN</a>
+                                </li>
+                                <li>
+                                    <a id="a62" href="cheque_entry.aspx"server" >Cheque IN</a>
+                                </li>
+                                  <li>
+                                    <a id="a13" href="cash_out.aspx" runat="server" >Cash Out</a>
+                                </li>
+                                 <li>
+                                    <a id="a201" href="issue_salesman_challan.aspx" runat="server" visible="false" >Issue Salesman Challan</a>
+                                </li>
+                            </ul>
+                        </li>
+                            <li>
+                            <a id="a14" href="#" runat="server" visible="false"><i class="fa fa-sitemap fa-3x"></i>Purchase Master<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a15" href="company_purchase_challan_issue.aspx" runat="server" >Challan Issue (PWSE)</a>
+                                </li>
+                                  <li>
+                                    <a id="a16" href="purchase_price_master.aspx" runat="server" >Purchase Price Master </a>
+                                </li>
+                            </ul>
+                        </li>
+                          <li>
+                            <a id="a56" href="#" runat="server" visible="true"><i class="fa fa-sitemap fa-3x"></i>Employee Section<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a55" href="create_employee.aspx" runat="server" >Create Employee</a>
+                                </li>
+                                  <li>
+                                    <a id="a58" href="take_attendance.aspx" runat="server" >Take Employee Attendance </a>
+                                </li>
+                            </ul>
+                        </li>
+                             <li>
+                            <a id="a49" href="#" runat="server" visible="true"><i class="fa fa-sitemap fa-3x"></i>Reports<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a50" href="sale_report_amountwise.aspx" runat="server" >Sale Report Amountwise</a>
+                                </li>
+                                  <li>
+                                    <a id="a51" href="sale_report_volumewise.aspx.aspx" runat="server" >Sale Report Volumewise </a>
+                                </li>
+                                <li>
+                                    <a id="a70" href="sample_report.aspx" runat="server" >Sample Report </a>
+                                </li>
+                                <li>
+                                    <a id="a71" href="dd_report.aspx" runat="server" >DD Report </a>
+                                </li>
+                            </ul>
+                        </li>
+                                <li>
+                            <a id="a17" href="#" runat="server" visible="false"><i class="fa fa-sitemap fa-3x"></i>Ledger Master<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a18" href="dealer_ledger.aspx" runat="server" >Dealer Ledger</a>
+                                </li>
+                                  <li>
+                                    <a id="a45" href="salesman_ledger.aspx" runat="server" >Salesman Ledger</a>
+                                </li>
+                                 <li>
+                                    <a id="a57" href="employee_ledger.aspx" runat="server" >Employee Ledger</a>
+                                </li>
+                                  <li>
+                                    <a id="a48" href="sample_challan_ledger.aspx" runat="server"  >Sample Ledger  </a>
+                                </li>
+                                <li>
+                                    <a id="a43" href="cash_ledger.aspx" runat="server" >Cash Ledger</a>
+                                </li>
+                                  <li>
+                                    <a id="a19" href="company_ledger.aspx" runat="server" >Company Ledger </a>
+                                </li>
+                                  <li>
+                                    <a id="a20" href="daily_labour_ledger.aspx" runat="server" visible="false" >Daily Labour Ledger </a>
+                                </li>
+                                <li>
+                                    <a id="a21" href="trolla_labour_ledger.aspx" runat="server" visible="false" >Trolla Labour Ledger </a>
+                                </li>
+                                 <li>
+                                    <a id="a22" href="driver_ledger.aspx" runat="server"  >Driver Ledger </a>
+                                </li>
+                                 <li>
+                                    <a id="a34" href="all_dealer_bal_sheet.aspx" runat="server" >All Dealer Balance Ledger </a>
+                                </li>
+                                 <li>
+                                    <a id="a64" href="all_salesman_bal_sheet.aspx" runat="server" >All Saleman Balance Ledger </a>
+                                </li>
+                                 <li>
+                                    <a id="a35" href="payment_slip_master.aspx" runat="server" >Payment Slip Master </a>
+                                </li>
+                                 <li>
+                                    <a id="a67" href="current_ledger.aspx" runat="server" visible="false" >Current Ledger </a>
+                                </li>
+                                 <li>
+                                    <a id="a68" href="obc_ledger.aspx" runat="server" visible="false" >OBC Ledger </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="a23" href="#" runat="server" visible="false"><i class="fa fa-sitemap fa-3x"></i>Masters<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a id="a44" href="create_expense_head.aspx" runat="server" >Create Expenses Head</a>
+                                </li>
+                                   <li>
+                                    <a id="a53" href="permission_expense.aspx" runat="server" >Create Permission Expenses Head</a>
+                                </li>
+                                <li>
+                                    <a id="a63" href="admin_expense.aspx" runat="server" >Create Admin Expenses Head</a>
+                                </li>
+                                <li>
+                                    <a id="a65" href="create_checking_expense.aspx" runat="server" >Create checking Expenses Head</a>
+                                </li>
+                                <li>
+                                    <a id="a24" href="company_master.aspx" runat="server" >Create Company</a>
+                                </li>
+                                  <li>
+                                    <a id="a25" href="create_product.aspx" runat="server" >Create Product </a>
+                                </li>
+                                <li>
+                                    <a id="a26" href="create_dealer.aspx" runat="server" >Create Dealer</a>
+                                </li>
+                                <li>
+                                    <a id="a27" href="dealer_product_maping.aspx" runat="server" >Create Dealer Product Pricing</a>
+                                </li>
+                                <li>
+                                    <a id="a60" href="all_dealer_pricing_once.aspx" runat="server"  >Create All Dealer Product Pricing </a>
+                                </li>
+                                 <li>
+                                    <a id="a61" href="all_salesman_once_pricing.aspx" runat="server"  >Create All Salesman Commision Pricing </a>
+                                </li>
+                                   <li>
+                                    <a id="a28" href="create_driver.aspx" runat="server" >Create Driver</a>
+                                </li>
+                                <li>
+                                    <a id="a29" href="create_salesman.aspx" runat="server" >Create Sales man</a>
+                                </li>
+                               
+                                <li>
+                                    <a id="a30" href="create_saleman_commssion_pricing.aspx" runat="server" >Create Saleman Commission Pricing</a>
+                                </li>
+                                
+                                 <li>
+                                    <a id="a31" href="create_daily_labour_charges.aspx" runat="server" >Create Daily Labour Charges</a>
+                                </li>
+                                  <li>
+                                    <a id="a32" href="create_trolla_labour_charges.aspx" runat="server" >Create Trolla Labour Charges</a>
+                                </li>
+                                   <li>
+                                    <a id="a37" href="set_dealer_min_pricing.aspx" runat="server" >Set Dealer/Salesman Minimum Pricing</a>
+                                </li>
+                                   <li>
+                                    <a id="a33" href="register.aspx" runat="server" >Create User Account</a>
+                                </li>
+                                    
+                               
+                            </ul>
+                        </li>
+                  
+                    </ul>
+
+                </div>
+
+            </nav>
+            <!-- /. NAV SIDE  -->
+            <div id="page-wrapper">
+                    <!-- /. POP UP  -->
+         
+                  <%-- <a id="lblcrm" runat="server" visible="false" href="Dashboard.aspx">CRM</a> || <a id="lblpurchase" runat="server" visible="false" href="Purchase Management/dashboard.aspx">Purchase</a>--%>
+                
+                <div id="page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                         
+                        </div>
+                    </div>
+                    <!-- /. ROW  -->
+                    <hr />
+                </div>
+                <!-- /. PAGE INNER  -->
+            </div>
+            <!-- /. PAGE WRAPPER   -->
+            <div id="demo" runat="server"  visible="false" class="ezmodal">
+  <div class="ezmodal-container" >
+ 
+      <div class="ezmodal-content" >
+     <img src="img/ecoste-logo.png"  style=" float: left;    margin-top: 5px;"/>
+          <table align="center" >
+              <%--tr>
+                  <td align="center">
+                      <br />
+                      <img src="img/ecoste-logo.png"  style=" float: left;    margin-top: -75px;      margin-left: -35px;"/>
+                      <br />
+                  </td>
+              </tr>--%>
+            <div style="background-color: #FFFFFF; padding:5px;  border-radius:5px;  vertical-align:middle;color:black; text-align:right">
+                 Assign Time :<asp:Label ID="lblMsg1" runat="server" Font-Names="Calibri" ForeColor="Red"></asp:Label><br />
+                 Duration :<asp:Label ID="lblMsg2" runat="server" Font-Names="Calibri" ForeColor="Red"></asp:Label>&nbsp;hour<br />
+                 Pending Since:&nbsp; <asp:Label ID="lblMsg0" runat="server" Font-Names="Calibri" ForeColor="Red"></asp:Label>
+                
+                </div>
+          
+                
+              <tr>
+                  <td align="left">
+                      &nbsp;</td>
+              </tr>
+              <tr>
+                  <td align="center">
+                      <div style="background-color: #FFFFFF; padding:15px; border:1px solid #8dc96d; border-radius:15px;color:black">
+                      Task:&nbsp;<asp:Label ID="lblMsg" runat="server" Font-Names="Calibri" Font-Size="Small" Font-Bold="True" ></asp:Label>
+
+                      <asp:Label ID="Label3" runat="server" Text="Label" Visible="False"></asp:Label>
+
+                      <br />
+                          </div>
+
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+
+                      &nbsp;</td>
+              </tr>
+              <tr>
+                  <td align="center">
+
+                      <asp:GridView ID="GridView1" runat="server">
+                          <Columns>
+                            <asp:TemplateField HeaderText="Sr No.">
+                            <ItemTemplate>
+                                <%#Container .DataItemIndex +1 %>
+                                
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                              </Columns>
+                      </asp:GridView>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+
+                      &nbsp;</td>
+              </tr>
+              <tr>
+                  <td align="center">
+
+                      <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" placeholder="Reply" Height="90px" Width="400px"></asp:TextBox>
+
+                      <br />
+                      <asp:Label ID="Label4" runat="server" ForeColor="Red"></asp:Label>
+
+                      <br />
+
+                  </td>
+              </tr>
+              <tr>
+                  <td align="center">
+
+                      <asp:RadioButtonList ID="RadioButtonList1" runat="server" ForeColor="Blue" RepeatColumns="2" CssClass="chkbox">
+                          <asp:ListItem Selected="True">In Progress</asp:ListItem>
+                          <asp:ListItem>Completed</asp:ListItem>
+                      </asp:RadioButtonList>
+                      <br />
+                  </td>
+              </tr>
+              <tr>
+                  <td align="center">
+
+                  <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" CausesValidation="False" />  
+                <%--  &nbsp;<asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Close" CausesValidation="False" /> --%> 
+                    
+                  </td>
+              </tr>
+              </table>
+         
+      </div>
+      <div class="ezmodal-footer">
+          <button type="button" class="btn" data-dismiss="ezmodal">Close</button>
+      </div>
+  </div>
+</div>
+        </div>
+            
+    </form>
+</body>
+</html>

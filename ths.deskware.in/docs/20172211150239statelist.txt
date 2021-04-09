@@ -1,0 +1,4 @@
+http://www.databasejournal.com/features/mssql/converting-rows-to-columns-pivot-and-columns-to-rows-unpivot-in-sql-server.html
+
+
+ select (size+c_name)as size,cast([12x18Allient] as nvarchar(max))as [12x18Allient], (dealer_name)as Name   from tbl_challan_details_master Pivot ( sum(qty) for  qty  in ( [12x18Allient]))as pvt

@@ -1,0 +1,12 @@
+
+
+http://www.templatemonster.com/demo/53714.html
+
+http://www.templatemonster.com/demo/52965.html
+
+http://www.bootstrap-template.com/templates/bootstrap-templates/300111844/
+https://www.youtube.com/watch?v=87ng0Fid-Mw
+
+
+
+select REPLACE(mob_no,substring(mob_no,1,8),'XXXXXXXX') as contact_no from enquiry_master
